@@ -29,6 +29,10 @@ void screen_write_line(uint32_t line, String smsg) {
     u8g2.drawStr(0,SCREEN_LINE(line),(smsg2.substring(0, 16)).c_str());
     u8g2.sendBuffer();
 }
+#else
+//dummy func.
+void screen_write_line(uint32_t line, char* msg) {}
+void screen_write_line(uint32_t line, String smsg) {}
 #endif
 
 
