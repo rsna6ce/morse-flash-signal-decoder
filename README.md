@@ -3,6 +3,12 @@
 ## What is morse-flash-signal-decoder?
 * This is a tool to decode the Morse code of light from Signal lamps.
 
+<img width=480 src="img/image.png">
+
+<video controls playsinline muted="false" width="480" src="img/mov.mp4" type="video/mp4">
+ Sorry, your browser doesn't support embedded videos.
+</video>
+
 ## Parts
 * ESP32 (DOIT ESP32 DEVKIT V1)
     * https://amazon.co.jp/dp/B07MH58JS2/
