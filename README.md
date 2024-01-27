@@ -29,4 +29,5 @@
 | OLED       | SCA       | D21 |
 | OLED       | SDL       | D22 |
 
-
+## depend library
+* U8g2 ver.2.33.15
