@@ -30,9 +30,12 @@ void screen_write_line(uint32_t line, String smsg) {
     u8g2.sendBuffer();
 }
 #else
-//dummy func.
-void screen_write_line(uint32_t line, char* msg) {}
-void screen_write_line(uint32_t line, String smsg) {}
+void screen_write_line(uint32_t line, char* msg) {
+    Serial.println(String(line) + " \"" + msg + "\"");
+}
+void screen_write_line(uint32_t line, String msg) {
+    Serial.println(String(line) + " \"" + msg + "\"");
+}
 #endif
 
 
@@ -59,7 +62,7 @@ void setup() {
     Serial.begin( 115200 );
     Serial.println( "Hello!" );
     pinMode(pinBuzz, OUTPUT);
-    pinMode(pinPhoto, INPUT);
+    pinMode(pinPhoto, INPUT_PULLUP);
 
     ledcSetup(chBuzz, 12000, 8);
     ledcAttachPin(pinBuzz, chBuzz);
@@ -171,7 +174,6 @@ void loop() {
                     message = message.substring(msg_len-16);
                 }
                 screen_write_line(1,message);
-                DEBUG_PRINT_VARIABLE(message);
                 pattern = "";
             }
             if (!delimit_word && millis_diff > len_interval_long) {
@@ -182,21 +184,18 @@ void loop() {
                     message = message.substring(msg_len-16);
                 }
                 screen_write_line(1,message);
-                DEBUG_PRINT_VARIABLE(message);
             }
         } else {
             delimit_flash = false;
             delimit_word = false;
         }
     }
+    // BOOT button : reset message
     if (digitalRead(pinOnboard)==LOW) {
         message = "";
         pattern = "";
         screen_write_line(0,"");
         screen_write_line(1,"");
     }
-#if defined(U8G2_ENABLE)
-    
-#endif
 }
 
